@@ -1,12 +1,12 @@
+import { useAtom, useSetAtom } from 'jotai'
 import { enqueueSnackbar } from 'notistack'
-import { useRecoilState, useSetRecoilState } from 'recoil'
 import { useDB } from 'src/hooks'
-import { customBotAvatarUrlState, settingsState } from 'src/stores/global'
+import { customBotAvatarUrlAtom, settingsAtom } from 'src/stores/global'
 import { Settings } from 'src/types/settings'
 
 const useSettings = () => {
-  const [settings, setSettings] = useRecoilState(settingsState)
-  const setCustomBotAvatarUrl = useSetRecoilState(customBotAvatarUrlState)
+  const [settings, setSettings] = useAtom(settingsAtom)
+  const setCustomBotAvatarUrl = useSetAtom(customBotAvatarUrlAtom)
   const { updateOneById } = useDB('settings')
 
   const updateSettings = async (newSettings: Settings) => {

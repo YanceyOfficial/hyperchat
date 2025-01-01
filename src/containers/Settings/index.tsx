@@ -15,23 +15,23 @@ import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import Typography from '@mui/material/Typography'
 import { Formik } from 'formik'
+import { useAtom, useAtomValue } from 'jotai'
 import { enqueueSnackbar } from 'notistack'
 import { ChangeEvent, FC } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import HyperChatLogo from 'src/assets/images/logo.png'
 import { SolidSettingsBrightnessIcon } from 'src/components/Icons'
 import ImportAndExportDexie from 'src/components/ImportAndExportDexie'
 import { useSettings, useTheme } from 'src/hooks'
 import {
-  customBotAvatarUrlState,
-  settingsDialogVisibleState
+  customBotAvatarUrlAtom,
+  settingsDialogVisibleAtom
 } from 'src/stores/global'
 import { Companies, ThemeMode } from 'src/types/global'
 import { Settings as SettingsParams } from 'src/types/settings'
 
 const Settings: FC = () => {
-  const [visible, setVisible] = useRecoilState(settingsDialogVisibleState)
-  const customBotAvatarUrl = useRecoilValue(customBotAvatarUrlState)
+  const [visible, setVisible] = useAtom(settingsDialogVisibleAtom)
+  const customBotAvatarUrl = useAtomValue(customBotAvatarUrlAtom)
   const { settings, updateSettings } = useSettings()
   const { toggleTheme } = useTheme()
 

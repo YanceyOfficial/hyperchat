@@ -1,7 +1,7 @@
 import { PauseCircleIcon, PlayCircleIcon } from '@heroicons/react/24/outline'
+import { useAtom } from 'jotai'
 import { FC, useEffect, useRef, useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { currPlayingAudioIdState } from 'src/stores/conversation'
+import { currPlayingAudioIdAtom } from 'src/stores/conversation'
 import WaveSurfer from 'wavesurfer.js'
 
 interface Props {
@@ -9,8 +9,8 @@ interface Props {
 }
 
 const Waveform: FC<Props> = ({ filename }) => {
-  const [currPlayingAudioId, setCurrPlayingAudioId] = useRecoilState(
-    currPlayingAudioIdState
+  const [currPlayingAudioId, setCurrPlayingAudioId] = useAtom(
+    currPlayingAudioIdAtom
   )
   const [src, setSrc] = useState('')
   const [isPlaying, toggleIsPlaying] = useState(false)

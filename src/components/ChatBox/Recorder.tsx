@@ -1,21 +1,21 @@
 import { Player } from '@lottiefiles/react-lottie-player'
 import classNames from 'classnames'
+import { useAtom, useAtomValue } from 'jotai'
 import { enqueueSnackbar } from 'notistack'
 import { FC, useRef, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import RecorderJSON from 'src/assets/lotties/recorder.json'
 import { useSTT } from 'src/hooks'
-import { inputTextState } from 'src/stores/conversation'
-import { settingsState } from 'src/stores/global'
+import { inputTextAtom } from 'src/stores/conversation'
+import { settingsAtom } from 'src/stores/global'
 
 interface Props {
   className?: string
 }
 
 const AudioRecorder: FC<Props> = ({ className }) => {
-  const settings = useRecoilValue(settingsState)
+  const settings = useAtomValue(settingsAtom)
   const createSTT = useSTT()
-  const [inputText, setInputText] = useRecoilState(inputTextState)
+  const [inputText, setInputText] = useAtom(inputTextAtom)
   const [isRecording, setIsRecording] = useState(false)
   // const [audioUrl, setAudioUrl] = useState('')
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)

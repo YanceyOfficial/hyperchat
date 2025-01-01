@@ -1,8 +1,8 @@
 import { produce, WritableDraft } from 'immer'
+import { useAtom } from 'jotai'
 import { useCallback } from 'react'
-import { useRecoilState } from 'recoil'
 import { useDB } from 'src/hooks'
-import { conversationState } from 'src/stores/conversation'
+import { conversationAtom } from 'src/stores/conversation'
 import {
   ContentPart,
   ContentPartType,
@@ -14,7 +14,7 @@ import { v4 } from 'uuid'
 
 const useStoreMessages = () => {
   const { updateOneById } = useDB('conversations')
-  const [conversation, setConversation] = useRecoilState(conversationState)
+  const [conversation, setConversation] = useAtom(conversationAtom)
 
   // If a stream chat completion request fails, delete it in the user interface.
   const rollbackMessage = () => {

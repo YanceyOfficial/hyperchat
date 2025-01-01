@@ -1,10 +1,10 @@
 import { PaperClipIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
+import { useAtom } from 'jotai'
 import { enqueueSnackbar } from 'notistack'
 import { ChangeEvent, FC, useRef } from 'react'
-import { useRecoilState } from 'recoil'
 import { convertToBase64 } from 'src/shared/utils'
-import { base64FilePromptState } from 'src/stores/conversation'
+import { base64FilePromptAtom } from 'src/stores/conversation'
 
 interface Props {
   className?: string
@@ -12,9 +12,7 @@ interface Props {
 
 const AttachmentUploader: FC<Props> = ({ className }) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const [base64FilePrompt, setBase64FilePrompt] = useRecoilState(
-    base64FilePromptState
-  )
+  const [base64FilePrompt, setBase64FilePrompt] = useAtom(base64FilePromptAtom)
 
   const validate = () => true
 

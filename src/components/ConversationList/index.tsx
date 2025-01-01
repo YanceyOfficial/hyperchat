@@ -1,10 +1,10 @@
+import { useAtom, useAtomValue } from 'jotai'
 import { enqueueSnackbar } from 'notistack'
 import { FC } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import { useDB } from 'src/hooks'
 import { BAN_ACTIVE_HINT } from 'src/shared/constants'
-import { conversationState } from 'src/stores/conversation'
-import { companyState, loadingState } from 'src/stores/global'
+import { conversationAtom } from 'src/stores/conversation'
+import { companyAtom, loadingAtom } from 'src/stores/global'
 import { Conversation } from 'src/types/conversation'
 import { v4 } from 'uuid'
 import Divider from '../Divider'
@@ -17,10 +17,9 @@ interface Props {
 }
 
 const ConversationList: FC<Props> = ({ conversations }) => {
-  const loading = useRecoilValue(loadingState)
-  const company = useRecoilValue(companyState)
-  const [currentConversation, setConversation] =
-    useRecoilState(conversationState)
+  const loading = useAtomValue(loadingAtom)
+  const company = useAtomValue(companyAtom)
+  const [currentConversation, setConversation] = useAtom(conversationAtom)
   const { insertOne } = useDB('conversations')
 
   const addConversation = async () => {

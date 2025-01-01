@@ -1,13 +1,13 @@
+import { useAtomValue } from 'jotai'
 import { FC } from 'react'
-import { useRecoilValue } from 'recoil'
 import configurations from 'src/configurations'
-import { conversationState } from 'src/stores/conversation'
-import { companyState, configurationState } from 'src/stores/global'
+import { configurationAtom, conversationAtom } from 'src/stores/conversation'
+import { companyAtom } from 'src/stores/global'
 
 const TokenCount: FC = () => {
-  const conversation = useRecoilValue(conversationState)
-  const company = useRecoilValue(companyState)
-  const configuration = useRecoilValue(configurationState)
+  const conversation = useAtomValue(conversationAtom)
+  const company = useAtomValue(companyAtom)
+  const configuration = useAtomValue(configurationAtom)
   const { models } = configurations[company]
   const { maxInput } =
     models.find((m) => m.modelName === configuration.model) ?? {}

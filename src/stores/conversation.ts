@@ -1,32 +1,20 @@
-import { atom } from 'recoil'
-import { Base64FilePrompt, Conversation } from 'src/types/conversation'
+import { atom } from 'jotai'
+import {
+  Base64FilePrompt,
+  Configuration,
+  Conversation
+} from 'src/types/conversation'
 
-export const conversationState = atom<Conversation | undefined>({
-  key: 'CurrConversation',
-  default: undefined
-})
+export const conversationAtom = atom<Conversation | undefined>(undefined)
 
-export const summaryInputVisibleState = atom({
-  key: 'SummaryInputVisible',
-  default: false
-})
+export const summaryInputVisibleAtom = atom(false)
 
-export const avatarPickerVisibleState = atom({
-  key: 'AvatarPickerVisible',
-  default: false
-})
+export const avatarPickerVisibleAtom = atom(false)
 
-export const currPlayingAudioIdState = atom<string | undefined>({
-  key: 'CurrPlayingAudioId',
-  default: undefined
-})
+export const currPlayingAudioIdAtom = atom<string | undefined>(undefined)
 
-export const inputTextState = atom({
-  key: 'InputText',
-  default: ''
-})
+export const inputTextAtom = atom('')
 
-export const base64FilePromptState = atom<Base64FilePrompt[]>({
-  key: 'Base64FilePrompt',
-  default: []
-})
+export const base64FilePromptAtom = atom<Base64FilePrompt[]>([])
+
+export const configurationAtom = atom<Configuration | undefined>(undefined)

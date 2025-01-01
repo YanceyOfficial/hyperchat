@@ -1,24 +1,24 @@
 import { Cog6ToothIcon as Cog6ToothIconOutline } from '@heroicons/react/24/outline'
 import { Cog6ToothIcon as Cog6ToothIconSolid } from '@heroicons/react/24/solid'
+import { useAtom, useAtomValue } from 'jotai'
 import { FC } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import HyperChatLogo from 'src/assets/images/logo.png'
 import companies from 'src/shared/companies'
+import { configurationAtom } from 'src/stores/conversation'
 import {
-  companyState,
-  configurationState,
-  settingsDialogVisibleState,
-  settingsState
+  companyAtom,
+  settingsAtom,
+  settingsDialogVisibleAtom
 } from 'src/stores/global'
 import Avatar from '../Avatar'
 import Divider from '../Divider'
 import Loading from '../Loading'
 
 const Sidebar: FC = () => {
-  const [company, setCompany] = useRecoilState(companyState)
-  const settings = useRecoilValue(settingsState)
-  const configuration = useRecoilValue(configurationState)
-  const [visible, setVisible] = useRecoilState(settingsDialogVisibleState)
+  const [company, setCompany] = useAtom(companyAtom)
+  const settings = useAtomValue(settingsAtom)
+  const configuration = useAtomValue(configurationAtom)
+  const [visible, setVisible] = useAtom(settingsDialogVisibleAtom)
 
   if (!settings || !configuration) return <Loading />
 

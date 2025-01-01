@@ -127,6 +127,4 @@ export const collectOpenAiPrompt = (userPrompt: ContentPart) => {
   return text
 }
 
-export const countTokensV2 = ()=> {
-  
-}
+export const countTokensV2 = () => {}

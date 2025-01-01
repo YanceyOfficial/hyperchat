@@ -1,13 +1,13 @@
 import classNames from 'classnames'
+import { useAtomValue } from 'jotai'
 import { FC, memo, useEffect, useMemo, useRef } from 'react'
-import { useRecoilValue } from 'recoil'
 import NoDataIllustration from 'src/assets/illustrations/no-data.svg'
-import { conversationState } from 'src/stores/conversation'
+import { conversationAtom } from 'src/stores/conversation'
 import ChatBubble from './ChatBubble'
 
 const ChatMessages: FC = () => {
   const chatBoxRef = useRef<HTMLDivElement>(null)
-  const conversation = useRecoilValue(conversationState)
+  const conversation = useAtomValue(conversationAtom)
   const hasMessages = useMemo(
     () => conversation && conversation.messages.length > 0,
     [conversation?.messages?.length]

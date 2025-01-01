@@ -1,13 +1,13 @@
 import classNames from 'classnames'
+import { useAtom, useAtomValue } from 'jotai'
 import { FC, memo, useEffect, useRef, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import { useChatCompletion } from 'src/hooks'
 import {
-  base64FilePromptState,
-  conversationState,
-  inputTextState
+  base64FilePromptAtom,
+  conversationAtom,
+  inputTextAtom
 } from 'src/stores/conversation'
-import { loadingState, settingsState } from 'src/stores/global'
+import { loadingAtom, settingsAtom } from 'src/stores/global'
 import { ContentPartType, TextPrompt } from 'src/types/conversation'
 import { LoadingIcon, SolidSendIcon } from '../Icons'
 import AttachmentPreview from './AttachmentPreview'
@@ -16,16 +16,14 @@ import AudioRecorder from './Recorder'
 import TokenCount from './TokenCount'
 
 const InputBox: FC = () => {
-  const conversation = useRecoilValue(conversationState)
-  const settings = useRecoilValue(settingsState)
-  const loading = useRecoilValue(loadingState)
-  const [inputText, setInputText] = useRecoilState(inputTextState)
+  const conversation = useAtomValue(conversationAtom)
+  const settings = useAtomValue(settingsAtom)
+  const loading = useAtomValue(loadingAtom)
+  const [inputText, setInputText] = useAtom(inputTextAtom)
   const createChatCompletion = useChatCompletion()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [isTyping, setIsTyping] = useState(false)
-  const [base64FilePrompt, setBase64FilePrompt] = useRecoilState(
-    base64FilePromptState
-  )
+  const [base64FilePrompt, setBase64FilePrompt] = useAtom(base64FilePromptAtom)
 
   const resetInput = () => {
     setInputText('')

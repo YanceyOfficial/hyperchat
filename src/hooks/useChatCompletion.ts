@@ -1,7 +1,7 @@
 import Anthropic, { AnthropicError } from '@anthropic-ai/sdk'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { TiktokenModel } from 'js-tiktoken'
 import { enqueueSnackbar } from 'notistack'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
 import configurations from 'src/configurations'
 import { useClients, useStoreMessages } from 'src/hooks'
 import {
@@ -11,12 +11,8 @@ import {
   getTokensCount,
   showRequestErrorToast
 } from 'src/shared/utils'
-import { conversationState } from 'src/stores/conversation'
-import {
-  companyState,
-  configurationState,
-  loadingState
-} from 'src/stores/global'
+import { configurationAtom, conversationAtom } from 'src/stores/conversation'
+import { companyAtom, loadingAtom } from 'src/stores/global'
 import {
   transformContextToAnthropic,
   transformContextToGoogle,
@@ -30,10 +26,10 @@ import { Companies } from 'src/types/global'
 
 const useChatCompletion = () => {
   const { openAiClient, googleClient, anthropicClient } = useClients()
-  const conversation = useRecoilValue(conversationState)
-  const company = useRecoilValue(companyState)
-  const configuration = useRecoilValue(configurationState)
-  const setLoading = useSetRecoilState(loadingState)
+  const conversation = useAtomValue(conversationAtom)
+  const company = useAtomValue(companyAtom)
+  const configuration = useAtomValue(configurationAtom)
+  const setLoading = useSetAtom(loadingAtom)
   const {
     rollbackMessage,
     saveUserMessage,

@@ -1,16 +1,16 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { useClients } from 'src/hooks'
 import { showRequestErrorToast } from 'src/shared/utils'
-import { conversationState } from 'src/stores/conversation'
-import { companyState, loadingState, settingsState } from 'src/stores/global'
+import { conversationAtom } from 'src/stores/conversation'
+import { companyAtom, loadingAtom, settingsAtom } from 'src/stores/global'
 import { Companies } from 'src/types/global'
 
 const useTTS = () => {
   const { openAiClient } = useClients()
-  const conversation = useRecoilValue(conversationState)
-  const setLoading = useSetRecoilState(loadingState)
-  const settings = useRecoilValue(settingsState)
-  const company = useRecoilValue(companyState)
+  const conversation = useAtomValue(conversationAtom)
+  const setLoading = useSetAtom(loadingAtom)
+  const settings = useAtomValue(settingsAtom)
+  const company = useAtomValue(companyAtom)
 
   if (!settings || !conversation) return
 

@@ -8,20 +8,20 @@ import Select from '@mui/material/Select'
 import TextField from '@mui/material/TextField'
 import Tooltip from '@mui/material/Tooltip'
 import { Form, Formik } from 'formik'
+import { useAtomValue } from 'jotai'
 import { FC } from 'react'
-import { useRecoilValue } from 'recoil'
 import configurations from 'src/configurations'
 import { useDB } from 'src/hooks'
-import { conversationState } from 'src/stores/conversation'
-import { companyState, configurationState } from 'src/stores/global'
+import { configurationAtom, conversationAtom } from 'src/stores/conversation'
+import { companyAtom } from 'src/stores/global'
 import { Configuration as IConfiguration } from 'src/types/conversation'
 import Divider from '../Divider'
 import InputSlider from '../InputSlider'
 
 const Configuration: FC = () => {
-  const conversation = useRecoilValue(conversationState)
-  const company = useRecoilValue(companyState)
-  const configuration = useRecoilValue(configurationState)
+  const conversation = useAtomValue(conversationAtom)
+  const company = useAtomValue(companyAtom)
+  const configuration = useAtomValue(configurationAtom)
   const { updateOneById } = useDB('configurations')
   const availableModels = configurations[company]?.models
 

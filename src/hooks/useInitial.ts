@@ -1,20 +1,20 @@
+import { useAtomValue, useSetAtom } from 'jotai'
 import { useEffect } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { configurationAtom } from 'src/stores/conversation'
 import {
-  companyState,
-  configurationState,
-  customBotAvatarUrlState,
-  settingsState
+  companyAtom,
+  customBotAvatarUrlAtom,
+  settingsAtom
 } from 'src/stores/global'
 import { Configuration } from 'src/types/conversation'
 import { Settings } from 'src/types/settings'
 import useDB from './useDB'
 
 const useInitial = () => {
-  const company = useRecoilValue(companyState)
-  const setConfiguration = useSetRecoilState(configurationState)
-  const setSettings = useSetRecoilState(settingsState)
-  const setCustomBotAvatarUrl = useSetRecoilState(customBotAvatarUrlState)
+  const company = useAtomValue(companyAtom)
+  const setConfiguration = useSetAtom(configurationAtom)
+  const setSettings = useSetAtom(settingsAtom)
+  const setCustomBotAvatarUrl = useSetAtom(customBotAvatarUrlAtom)
   const { toArray: configurationsToArray } = useDB('configurations')
   const { toArray: settingsToArray } = useDB('settings')
 

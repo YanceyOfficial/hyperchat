@@ -5,32 +5,32 @@ import {
 } from '@heroicons/react/24/solid'
 import Input from '@mui/material/Input'
 import classNames from 'classnames'
+import { useAtom, useAtomValue } from 'jotai'
 import { enqueueSnackbar } from 'notistack'
 import { FC, KeyboardEvent, memo, useEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import HyperChatLogo from 'src/assets/images/logo.png'
 import { useDB } from 'src/hooks'
 import { BAN_ACTIVE_HINT, EMPTY_CHAT_HINT } from 'src/shared/constants'
 import {
-  avatarPickerVisibleState,
-  conversationState,
-  summaryInputVisibleState
+  avatarPickerVisibleAtom,
+  conversationAtom,
+  summaryInputVisibleAtom
 } from 'src/stores/conversation'
-import { loadingState, onlineState } from 'src/stores/global'
+import { loadingAtom, onlineAtom } from 'src/stores/global'
 import { EmojiPickerProps } from 'src/types/global'
 import Avatar from '../Avatar'
 import EmojiPicker from '../EmojiPicker'
 
 const ContactHeader: FC = () => {
-  const loading = useRecoilValue(loadingState)
-  const [conversation, setConversation] = useRecoilState(conversationState)
-  const [summaryInputVisible, setSummaryInputVisible] = useRecoilState(
-    summaryInputVisibleState
+  const loading = useAtomValue(loadingAtom)
+  const [conversation, setConversation] = useAtom(conversationAtom)
+  const [summaryInputVisible, setSummaryInputVisible] = useAtom(
+    summaryInputVisibleAtom
   )
-  const [avatarPickerVisible, setAvatarPickerVisible] = useRecoilState(
-    avatarPickerVisibleState
+  const [avatarPickerVisible, setAvatarPickerVisible] = useAtom(
+    avatarPickerVisibleAtom
   )
-  const isOnline = useRecoilValue(onlineState)
+  const isOnline = useAtomValue(onlineAtom)
   const [isTyping, setIsTyping] = useState(false)
   const [summaryValue, setSummaryValue] = useState(conversation?.summary || '')
   const { updateOneById, deleteOneById } = useDB('conversations')

@@ -26,19 +26,16 @@
  * ```
  */
 
-import { StrictMode, Suspense } from 'react'
+import { Provider } from 'jotai'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { RecoilRoot } from 'recoil'
 import './assets/styles/index.css'
-import Loading from './components/Loading'
 import Layouts from './layouts'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-    <Suspense fallback={<Loading />}>
-      <RecoilRoot>
-        <Layouts />
-      </RecoilRoot>
-    </Suspense>
+    <Provider>
+      <Layouts />
+    </Provider>
   </StrictMode>
 )

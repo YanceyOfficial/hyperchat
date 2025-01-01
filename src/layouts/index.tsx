@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles'
+import { useAtomValue } from 'jotai'
 import { SnackbarProvider } from 'notistack'
 import { FC } from 'react'
-import { useRecoilValue } from 'recoil'
 import Loading from 'src/components/Loading'
 import Sidebar from 'src/components/Sidebar'
 import Conversation from 'src/containers/Conversation'
@@ -12,11 +12,12 @@ import {
   SNACKBAR_AUTO_HIDE_DURATION,
   SNACKBAR_MAX_NUM
 } from 'src/shared/constants'
-import { configurationState, settingsState } from 'src/stores/global'
+import { configurationAtom } from 'src/stores/conversation'
+import { settingsAtom } from 'src/stores/global'
 
 const Layouts: FC = () => {
-  const configuration = useRecoilValue(configurationState)
-  const settings = useRecoilValue(settingsState)
+  const configuration = useAtomValue(configurationAtom)
+  const settings = useAtomValue(settingsAtom)
   const { muiTheme } = useTheme()
   useOnline()
   useInitial()

@@ -1,11 +1,11 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import { useAtomValue } from 'jotai'
 import { OpenAI } from 'openai'
-import { useRecoilValue } from 'recoil'
-import { settingsState } from 'src/stores/global'
+import { settingsAtom } from 'src/stores/global'
 
 const useClients = () => {
-  const settings = useRecoilValue(settingsState)
+  const settings = useAtomValue(settingsAtom)
 
   const openAiClient = new OpenAI({
     apiKey: settings?.openaiSecretKey || '',

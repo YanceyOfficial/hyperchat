@@ -1,6 +1,6 @@
+import { useAtom } from 'jotai'
 import { FC } from 'react'
-import { useRecoilState } from 'recoil'
-import { base64FilePromptState } from 'src/stores/conversation'
+import { base64FilePromptAtom } from 'src/stores/conversation'
 import { SolidCloseIcon } from '../Icons'
 
 interface Props {
@@ -8,9 +8,7 @@ interface Props {
 }
 
 const AttachmentPreview: FC<Props> = ({ className }) => {
-  const [base64FilePrompt, setBase64FilePrompt] = useRecoilState(
-    base64FilePromptState
-  )
+  const [base64FilePrompt, setBase64FilePrompt] = useAtom(base64FilePromptAtom)
 
   const deleteBase64FilePrompt = (id: string) => {
     setBase64FilePrompt(base64FilePrompt.filter((prompt) => prompt.id !== id))

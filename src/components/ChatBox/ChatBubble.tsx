@@ -1,8 +1,8 @@
 import classNames from 'classnames'
+import { useAtomValue } from 'jotai'
 import { FC, memo } from 'react'
-import { useRecoilValue } from 'recoil'
 import HyperChatLogo from 'src/assets/images/logo.png'
-import { customBotAvatarUrlState } from 'src/stores/global'
+import { customBotAvatarUrlAtom } from 'src/stores/global'
 import {
   ContentPartType,
   Message,
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const ChatBubble: FC<Props> = ({ message }) => {
-  const customBotAvatarUrl = useRecoilValue(customBotAvatarUrlState)
+  const customBotAvatarUrl = useAtomValue(customBotAvatarUrlAtom)
 
   const getBotLogo = (role: Roles) =>
     role === Roles.Assistant

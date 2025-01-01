@@ -1,22 +1,22 @@
 import { useLiveQuery } from 'dexie-react-hooks'
+import { useAtom, useAtomValue } from 'jotai'
 import { FC, useEffect } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import ChatBox from 'src/components/ChatBox'
 import Configuration from 'src/components/Configuration'
 import ConversationList from 'src/components/ConversationList'
 import Divider from 'src/components/Divider'
 import { db } from 'src/db'
-import { conversationState } from 'src/stores/conversation'
-import { companyState } from 'src/stores/global'
+import { conversationAtom } from 'src/stores/conversation'
+import { companyAtom } from 'src/stores/global'
 import { Conversation as IConversation } from 'src/types/conversation'
 
 const Conversation: FC = () => {
-  const [conversation, setConversation] = useRecoilState(conversationState)
-  const company = useRecoilValue(companyState)
+  const [conversation, setConversation] = useAtom(conversationAtom)
+  const company = useAtomValue(companyAtom)
   const conversations = useLiveQuery<IConversation[]>(
     () =>
       db
-        .table<IConversation>('conversations')
+        .table('conversations')
         .where('company')
         .equals(company)
         .reverse()
