@@ -12,7 +12,7 @@ const TokenCount: FC = () => {
   const { maxInput } =
     models.find((m) => m.modelName === configuration.model) ?? {}
   const usedTokenCount =
-    conversation.messages.reduce((acc, val) => acc + val.tokenCount, 0) +
+    conversation?.messages.reduce((acc, val) => acc + val.tokenCount, 0) +
     configuration.systemMessageTokensCount
 
   return (

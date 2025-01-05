@@ -2,11 +2,7 @@ import classNames from 'classnames'
 import { useAtom, useAtomValue } from 'jotai'
 import { FC, memo, useEffect, useRef, useState } from 'react'
 import { useChatCompletion } from 'src/hooks'
-import {
-  base64FilePromptAtom,
-  conversationAtom,
-  inputTextAtom
-} from 'src/stores/conversation'
+import { base64FilePromptAtom, inputTextAtom } from 'src/stores/conversation'
 import { loadingAtom, settingsAtom } from 'src/stores/global'
 import { ContentPartType, TextPrompt } from 'src/types/conversation'
 import { LoadingIcon, SolidSendIcon } from '../Icons'
@@ -16,7 +12,6 @@ import AudioRecorder from './Recorder'
 import TokenCount from './TokenCount'
 
 const InputBox: FC = () => {
-  const conversation = useAtomValue(conversationAtom)
   const settings = useAtomValue(settingsAtom)
   const loading = useAtomValue(loadingAtom)
   const [inputText, setInputText] = useAtom(inputTextAtom)
@@ -79,8 +74,6 @@ const InputBox: FC = () => {
       }`
     }
   }, [inputText])
-
-  if (!conversation) return null
 
   return (
     <section className="absolute bottom-6 left-6 w-[calc(100%_-_3rem)] rounded-md border border-black/10 bg-white dark:bg-gray-700">

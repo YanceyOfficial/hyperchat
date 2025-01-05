@@ -1,13 +1,14 @@
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
 import { Marked, Renderer, Tokens } from 'marked'
+import markedKatex from 'marked-katex-extension'
 import { FC, memo, useCallback } from 'react'
 
 interface Props {
   src: string
 }
 
-const Markdown: FC<Props> = memo(({ src }) => {
+const Markdown: FC<Props> = ({ src }) => {
   const parseMarkdown = useCallback(() => {
     const renderer = new Renderer()
 
@@ -42,6 +43,8 @@ const Markdown: FC<Props> = memo(({ src }) => {
       }
     })
 
+    marked.use(markedKatex())
+
     return marked.parse(src)
   }, [src])
 
@@ -51,6 +54,6 @@ const Markdown: FC<Props> = memo(({ src }) => {
       dangerouslySetInnerHTML={{ __html: parseMarkdown() }}
     />
   )
-})
+}
 
-export default Markdown
+export default memo(Markdown)

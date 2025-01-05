@@ -12,14 +12,13 @@ import { useAtomValue } from 'jotai'
 import { FC } from 'react'
 import configurations from 'src/configurations'
 import { useDB } from 'src/hooks'
-import { configurationAtom, conversationAtom } from 'src/stores/conversation'
+import { configurationAtom } from 'src/stores/conversation'
 import { companyAtom } from 'src/stores/global'
 import { Configuration as IConfiguration } from 'src/types/conversation'
 import Divider from '../Divider'
 import InputSlider from '../InputSlider'
 
 const Configuration: FC = () => {
-  const conversation = useAtomValue(conversationAtom)
   const company = useAtomValue(companyAtom)
   const configuration = useAtomValue(configurationAtom)
   const { updateOneById } = useDB('configurations')
@@ -27,10 +26,6 @@ const Configuration: FC = () => {
 
   const updateConfiguration = async (configuration: IConfiguration) => {
     await updateOneById(configuration.company, configuration)
-  }
-
-  if (!conversation) {
-    return null
   }
 
   return (
