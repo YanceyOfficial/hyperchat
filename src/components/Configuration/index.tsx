@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField'
 import Tooltip from '@mui/material/Tooltip'
 import { Form, Formik } from 'formik'
 import { useAtomValue } from 'jotai'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import configurations from 'src/configurations'
 import { useDB } from 'src/hooks'
 import { configurationAtom } from 'src/stores/conversation'
@@ -181,4 +181,4 @@ const Configuration: FC = () => {
   )
 }
 
-export default Configuration
+export default memo(Configuration)
