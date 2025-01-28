@@ -31,7 +31,6 @@ const useInitial = () => {
 
   const getSettings = async () => {
     const [settings] = await settingsToArray<Settings>()
-    console.log(settings)
 
     if (settings.assistantAvatarFilename) {
       try {

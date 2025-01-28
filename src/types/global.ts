@@ -11,7 +11,8 @@ export interface SvgIconProps {
 export enum Companies {
   OpenAI = 'OpenAI',
   Google = 'Google',
-  Anthropic = 'Anthropic'
+  Anthropic = 'Anthropic',
+  Llama = 'Llama'
 }
 
 export interface EmojiPickerProps {

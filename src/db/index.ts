@@ -1,7 +1,8 @@
 import Dexie, { Table } from 'dexie'
 import { configuration as anthropicConfiguration } from 'src/configurations/anthropic'
 import { configuration as googleConfiguration } from 'src/configurations/google'
-import { configuration as openAIconfiguration } from 'src/configurations/openAI'
+import { configuration as llamaConfiguration } from 'src/configurations/llama'
+import { configuration as openAiConfiguration } from 'src/configurations/openAI'
 import { Configuration, Conversation } from 'src/types/conversation'
 import { Companies, ThemeMode } from 'src/types/global'
 import { Settings } from 'src/types/settings'
@@ -20,7 +21,7 @@ export class HyperChatDB extends Dexie {
       configurations:
         '&company, model, systemMessage, maxResponse, temperature, topP, *stop, frequencyPenalty, presencePenalty, systemMessageTokensCount',
       settings:
-        '&id, company, openaiSecretKey, openaiOrganizationId, openaiAuthorName, geminiSecretKey, anthropicSecretKey, themeMode, assistantAvatarFilename'
+        '&id, company, openaiSecretKey, openaiOrganizationId, openaiAuthorName, geminiSecretKey, anthropicSecretKey, ollamaUrl, themeMode, assistantAvatarFilename'
     })
   }
 }
@@ -37,7 +38,8 @@ export async function init() {
       .bulkAdd([
         anthropicConfiguration,
         googleConfiguration,
-        openAIconfiguration
+        openAiConfiguration,
+        llamaConfiguration
       ])
   }
 
@@ -51,6 +53,7 @@ export async function init() {
       openaiAuthorName: '',
       googleSecretKey: '',
       anthropicSecretKey: '',
+      ollamaUrl: '',
       themeMode: ThemeMode.system,
       assistantAvatarFilename: ''
     })

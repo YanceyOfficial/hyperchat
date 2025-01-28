@@ -8,6 +8,7 @@ export interface Settings {
   openaiAuthorName: string
   googleSecretKey: string
   anthropicSecretKey: string
+  ollamaUrl: string
   themeMode: ThemeMode
   assistantAvatarFilename: string
 }

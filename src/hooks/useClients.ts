@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { useAtomValue } from 'jotai'
+import { Ollama } from 'ollama'
 import { OpenAI } from 'openai'
 import { settingsAtom } from 'src/stores/global'
 
@@ -22,10 +23,13 @@ const useClients = () => {
     dangerouslyAllowBrowser: true
   })
 
+  const ollamaClient = new Ollama({ host: settings.ollamaUrl || '' })
+
   return {
     openAiClient,
     googleClient,
-    anthropicClient
+    anthropicClient,
+    ollamaClient
   }
 }
 

@@ -16,16 +16,19 @@ import { companyAtom, loadingAtom } from 'src/stores/global'
 import {
   transformContextToAnthropic,
   transformContextToGoogle,
+  transformContextToLlama,
   transformContextToOpenAI,
   transformToAnthropic,
   transformToGoogle,
+  transformToLlama,
   transformToOpenAI
 } from 'src/transformer'
 import { ContentPart, Roles } from 'src/types/conversation'
 import { Companies } from 'src/types/global'
 
 const useChatCompletion = () => {
-  const { openAiClient, googleClient, anthropicClient } = useClients()
+  const { openAiClient, googleClient, anthropicClient, ollamaClient } =
+    useClients()
   const conversation = useAtomValue(conversationAtom)
   const company = useAtomValue(companyAtom)
   const configuration = useAtomValue(configurationAtom)
@@ -217,10 +220,43 @@ const useChatCompletion = () => {
       })
   }
 
+  const createChatCompletionByLlama = async (userMessage: ContentPart) => {
+    await saveUserMessage(userMessage, 0)
+
+    const userPrompt = {
+      role: Roles.User,
+      content: transformToLlama(userMessage)
+    }
+    const contexts = transformContextToLlama(conversation.messages)
+
+    try {
+      setLoading(true)
+
+      let assistantToken = 0
+      const response = await ollamaClient.chat({
+        model,
+        messages: [...contexts, userPrompt],
+        stream: true
+      })
+      for await (const part of response) {
+
+        updateChatCompletionStream(part.message.content)
+        if (part.done) {
+          assistantToken = part.eval_count
+        }
+      }
+
+      saveAssistantMessage(assistantToken)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const services = {
     [Companies.OpenAI]: createChatCompletionByOpenAI,
     [Companies.Anthropic]: createChatCompletionByAnthropic,
-    [Companies.Google]: createChatCompletionByGoogle
+    [Companies.Google]: createChatCompletionByGoogle,
+    [Companies.Llama]: createChatCompletionByLlama
   }
 
   return services[company]

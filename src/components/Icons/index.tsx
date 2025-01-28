@@ -1,6 +1,7 @@
 import AnthropicLogoIcon from './AnthropicLogoIcon'
 import GoogleLogoIcon from './GoogleLogoIcon'
 import LoadingIcon from './LoadingIcon'
+import LlamaLogoIcon from './LlamaLogoIcon'
 import OpenAiLogoIcon from './OpenAiLogoIcon'
 import OutlinePlusIcon from './OutlinePlusIcon'
 import OutlineTranslationIcon from './OutlineTranslationIcon'
@@ -19,5 +20,6 @@ export {
   SolidSettingsBrightnessIcon,
   SolidTranslationIcon,
   AnthropicLogoIcon,
-  GoogleLogoIcon
+  GoogleLogoIcon,
+  LlamaLogoIcon
 }

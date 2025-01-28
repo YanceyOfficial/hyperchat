@@ -3,11 +3,15 @@ import { useAtomValue } from 'jotai'
 import { FC, memo, useEffect, useMemo, useRef } from 'react'
 import NoDataIllustration from 'src/assets/illustrations/no-data.svg'
 import { conversationAtom } from 'src/stores/conversation'
+import { loadingAtom } from 'src/stores/global'
+import { Roles } from 'src/types/conversation'
 import ChatBubble from './ChatBubble'
+import MessageSpinner from './MessageSpinner'
 
 const ChatMessages: FC = () => {
   const chatBoxRef = useRef<HTMLDivElement>(null)
   const conversation = useAtomValue(conversationAtom)
+  const loading = useAtomValue(loadingAtom)
   const hasMessages = useMemo(
     () => conversation && conversation.messages.length > 0,
     [conversation?.messages?.length]
@@ -27,7 +31,7 @@ const ChatMessages: FC = () => {
 
   useEffect(() => {
     scrollToBottom()
-  }, [conversation])
+  }, [loading, conversation])
 
   return (
     <section
@@ -42,6 +46,14 @@ const ChatMessages: FC = () => {
           {conversation?.messages.map((message) => (
             <ChatBubble key={message.id} message={message} />
           ))}
+
+          {loading &&
+            conversation?.messages[conversation?.messages.length - 1].role !==
+              Roles.Assistant && (
+              <div className="mb-4">
+                <MessageSpinner />
+              </div>
+            )}
         </>
       ) : (
         <img

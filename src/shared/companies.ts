@@ -1,7 +1,8 @@
 import {
   AnthropicLogoIcon,
   GoogleLogoIcon,
-  OpenAiLogoIcon
+  OpenAiLogoIcon,
+  LlamaLogoIcon
 } from 'src/components/Icons'
 import { SpeechService } from 'src/types/conversation'
 import { Companies } from 'src/types/global'
@@ -32,6 +33,17 @@ export default [
   {
     name: Companies.Anthropic,
     logo: AnthropicLogoIcon,
+    capabilities: {
+      attachment: {
+        mimetype: 'image/*',
+        multiple: true
+      },
+      speeches: []
+    }
+  },
+  {
+    name: Companies.Llama,
+    logo: LlamaLogoIcon,
     capabilities: {
       attachment: {
         mimetype: 'image/*',

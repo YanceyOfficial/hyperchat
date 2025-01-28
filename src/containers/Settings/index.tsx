@@ -1,5 +1,6 @@
 import { MoonIcon } from '@heroicons/react/24/outline'
 import { SunIcon } from '@heroicons/react/24/solid'
+import { Link } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -207,6 +208,41 @@ const Settings: FC = () => {
                       }
                       className="w-160"
                       {...formik.getFieldProps('googleSecretKey')}
+                    />
+
+                    <Button
+                      variant="contained"
+                      sx={{ width: 120 }}
+                      onClick={() => updateSettings(formik.values)}
+                    >
+                      Save
+                    </Button>
+                  </>
+                )}
+
+                {formik.values.company === Companies.Llama && (
+                  <>
+                    <TextField
+                      id="ollama-url"
+                      label="Ollama Url"
+                      size="small"
+                      type="text"
+                      className="w-160"
+                      placeholder="http://127.0.0.1:11434"
+                      helperText={
+                        <p>
+                          Make sure you've been running Llama by{' '}
+                          <Link
+                            href="https://github.com/ollama/ollama"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Ollama
+                          </Link>
+                          .
+                        </p>
+                      }
+                      {...formik.getFieldProps('ollamaUrl')}
                     />
 
                     <Button
