@@ -3,7 +3,7 @@ import { Companies } from 'src/types/global'
 
 export const models = [
   { modelName: 'llama3.3', maxInput: 128000, maxOutput: 8192 },
-  { modelName: 'llama3.2', maxInput: 128000, maxOutput: 4096 },
+  { modelName: 'llama3.2', maxInput: 128000, maxOutput: 4096 }
 ]
 
 export const configuration: Configuration = {
